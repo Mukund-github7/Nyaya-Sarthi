@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Link } from 'react-router-dom';
 import './index.css';
 import TopNavBar from './components/TopNavBar';
 import FooterSection from './components/FooterSection';
@@ -10,6 +10,7 @@ import WomensRightsPage from './pages/WomensRightsPage';
 import ResourcesPage from './pages/ResourcesPage';
 import CaseTrackerPage from './pages/CaseTrackerPage';
 import FindLawyerPage from './pages/FindLawyerPage';
+import DocumentAnalyzePage from './pages/DocumentAnalyzePage';
 
 
 const ScrollToTop = () => {
@@ -41,14 +42,22 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      
+      {/* Global Floating SOS Button */}
+      <Link to="/safety" className="floating-sos-btn" aria-label="Emergency SOS">
+        <span className="material-icons">security</span>
+        <span>SOS</span>
+      </Link>
+
       <Routes>
         {/* Standard Website Routes with Header/Footer */}
       <Route path="/" element={<StandardLayout><LandingPage /></StandardLayout>} />
       <Route path="/laws" element={<StandardLayout><LawsPage /></StandardLayout>} />
-      <Route path="/women" element={<StandardLayout><WomensRightsPage /></StandardLayout>} />
+      <Route path="/safety" element={<StandardLayout><WomensRightsPage /></StandardLayout>} />
       <Route path="/resources" element={<StandardLayout><ResourcesPage /></StandardLayout>} />
       <Route path="/casetracker" element={<StandardLayout><CaseTrackerPage /></StandardLayout>} />
-      <Route path="/lawyers" element={<StandardLayout><FindLawyerPage /></StandardLayout>} />
+      <Route path="/marketplace" element={<StandardLayout><FindLawyerPage /></StandardLayout>} />
+      <Route path="/analyze" element={<StandardLayout><DocumentAnalyzePage /></StandardLayout>} />
 
       {/* Standalone Full-Screen App Routes */}
       <Route path="/chat" element={<NyayaBotPage />} />

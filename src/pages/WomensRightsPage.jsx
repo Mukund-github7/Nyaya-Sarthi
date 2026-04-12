@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './WomensRightsPage.css';
 
 /**
@@ -10,37 +10,60 @@ import './WomensRightsPage.css';
  * Translated from Tailwind to strict Lex Obsidian Modular CSS.
  */
 const WomensRightsPage = () => {
-  const [activeTab, setActiveTab] = useState('Legal Guides');
+  const [activeTab, setActiveTab] = useState('Domestic Violence');
 
   const emergencyNumbers = [
-    { label: "Women's Helpline (All India)", number: "1091", icon: "phone_in_talk", color: "blue" },
-    { label: "Domestic Abuse Support", number: "181", icon: "security", color: "cyan" }
+    { label: "Police", number: "100", icon: "local_police", color: "blue" },
+    { label: "NCW Helpline", number: "7827170170", icon: "support_agent", color: "purple" },
+    { label: "Women Helpline", number: "1091", icon: "phone_in_talk", color: "cyan" }
   ];
 
-  const knowledgeCategories = [
-    {
-      title: "Workplace & Professional Rights",
-      description: "Detailed breakdown of the POSH Act, maternity benefits, and equal compensation frameworks for modern professionals.",
-      tags: ["POSH Act", "Equal Pay", "Remote Policy"],
-      icon: "work"
+  const safetySections = {
+    'Domestic Violence': {
+      title: "Domestic Violence (PWDVA 2005)",
+      desc: "Protection of Women from Domestic Violence Act provides civil remedies.",
+      steps: [
+        "1. Ensure Immediate Safety: Lock yourself in a room or leave the premises if possible.",
+        "2. Call 100 or 1091 immediately. Keep the phone on to record audio if safe to do so.",
+        "3. Do not change clothes or wash up if physical assault occurred. Seek medical attention immediately to document injuries.",
+        "4. Contact the nearest Protection Officer or an NGO under the PWDVA for a Domestic Incident Report (DIR).",
+        "5. Connect with a Duty Lawyer via NyayaSarthi SOS to file for immediate protection and residence orders."
+      ]
     },
-    {
-      title: "Marriage & Family Law",
-      description: "Expert guidance on divorce proceedings, maintenance rights, child custody, and complex inheritance laws.",
-      icon: "family_restroom",
-      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000&auto=format&fit=crop"
+    'Workplace Harassment': {
+      title: "Workplace Harassment (POSH Act 2013)",
+      desc: "Prevention of Sexual Harassment at Workplace.",
+      steps: [
+        "1. Clearly object to the behavior if you feel safe doing so, establishing that the conduct is unwelcome.",
+        "2. Document everything: Save emails, messages, notes, and records of incidents with dates and times.",
+        "3. Avoid isolating yourself with the harasser. Inform a trusted colleague.",
+        "4. File a formal written complaint to the Internal Complaints Committee (ICC) of your organization within 3 months.",
+        "5. If your company lacks an ICC or action is not taken, register a complaint with the Local Complaints Committee (LCC) or file an e-FIR."
+      ]
     },
-    {
-      title: "Domestic Safety",
-      description: "Protection from Violence Act and rapid response steps for immediate physical and psychological safety.",
-      icon: "home_health"
+    'Dowry/498A': {
+      title: "Dowry Harassment (IPC 498A & Dowry Prohibition Act)",
+      desc: "Cruelty by husband or relatives for unlawful dowry demands.",
+      steps: [
+        "1. Do not succumb to demands. Make copies of all financial transactions, wedding expenses, and gifts (stridhan).",
+        "2. Secure your original educational certificates, passport, and essential documents in a safe location outside the matrimonial home.",
+        "3. Record or document all verbal, emotional, or physical harassment related to dowry demands.",
+        "4. Register an FIR under Section 498A at the nearest Women's Police Station.",
+        "5. File a petition for the return of your 'stridhan' simultaneously."
+      ]
     },
-    {
-      title: "Civil Liberties",
-      description: "Fundamental rights, privacy laws, and freedom of expression guaranteed under the Constitution.",
-      icon: "gavel"
+    'Matrimonial Disputes': {
+      title: "Matrimonial Disputes & Maintenance",
+      desc: "Separation, Divorce, Child Custody, and Maintenance Rights.",
+      steps: [
+        "1. Create a secret financial safety net. Gather account details, property papers, and tax returns of your spouse.",
+        "2. Do not leave the matrimonial house unless there is a threat to your life (it strengthens your right to residence claim).",
+        "3. If forced out, immediately file under Section 125 CrPC for interim maintenance.",
+        "4. Do not sign any blank papers or mutual consent agreements under pressure.",
+        "5. Consult a verified family lawyer through NyayaSarthi before initiating any formal divorce petition."
+      ]
     }
-  ];
+  };
 
   const handleQuickExit = () => {
     // Quick escape feature: Instantly navigates away to a safe neutral site
@@ -51,6 +74,12 @@ const WomensRightsPage = () => {
     <div className="women-portal-container">
       
       <main className="women-main-content">
+        {/* Quick Exit Header */}
+        <div className="quick-exit-banner">
+          <p>If you are in immediate danger, close this page instantly.</p>
+          <button onClick={handleQuickExit} className="btn-quick-exit">Quick Exit (ESC)</button>
+        </div>
+
         {/* Hero Section */}
         <section className="women-hero-section">
           <div className="hero-glow-blob" />
@@ -61,23 +90,23 @@ const WomensRightsPage = () => {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="hero-content">
-              <div className="hero-badge">
-                <span className="badge-pulse" />
-                <span className="badge-text">National Legal Portal</span>
+              <div className="hero-badge" style={{ borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)'}}>
+                <span className="badge-pulse" style={{ backgroundColor: '#ef4444'}}/>
+                <span className="badge-text" style={{ color: '#fca5a5' }}>Women's Safety Wing</span>
               </div>
               <h2 className="hero-headline">
-                Empowering Her through <span className="text-gradient">Legal Clarity</span>
+                Rapid Safety & <span className="text-gradient">Legal Guidance</span>
               </h2>
               <p className="hero-description">
-                Advanced legal intelligence and rapid safety assistance designed exclusively for women's justice and safety across the nation.
+                Immediate action guides, verified procedures, and direct emergency connections for women facing critical disputes or danger.
               </p>
               <div className="hero-actions">
-                <button className="btn-hero-primary">
-                  Start Your Consultation
+                <button className="btn-hero-primary" style={{ background: '#e11d48' }}>
+                  Connect to Duty Lawyer NOW
                 </button>
-                <button className="btn-hero-secondary">
-                  Download Guide
-                </button>
+                <a href="tel:100" className="btn-hero-secondary">
+                  Call Police 100
+                </a>
               </div>
             </div>
             <div className="hero-imagery">
@@ -87,7 +116,7 @@ const WomensRightsPage = () => {
                   className="hero-image"
                   alt="Justice Symbol"
                  />
-                 <div className="hero-image-overlay" />
+                 <div className="hero-image-overlay" style={{ background: 'linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0) 100%)' }} />
               </div>
             </div>
           </motion.div>
@@ -106,24 +135,24 @@ const WomensRightsPage = () => {
               <div key={idx} className="crisis-card">
                  <div className="crisis-card-header">
                     <div className="crisis-card-meta">
-                      <p className="crisis-card-label">{item.label}</p>
-                      <h3 className="crisis-card-number">{item.number}</h3>
+                      <p className="crisis-card-label" style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>{item.label}</p>
+                      <h3 className="crisis-card-number" style={{ fontSize: '4rem', fontWeight: 900, lineHeight: 1, textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>{item.number}</h3>
                     </div>
                     <span className="material-icons crisis-card-icon">{item.icon}</span>
                  </div>
                  <p className="crisis-card-desc">
-                   Immediate response for {item.label.toLowerCase()} cases. Connect to verified police and medical units instantly.
+                   Immediate response for emergencies. Tappable live link.
                  </p>
-                 <button className={`btn-crisis-action ${item.color}`}>
+                 <a href={`tel:${item.number}`} className={`btn-crisis-action ${item.color}`} style={{ textDecoration: 'none', display: 'block', textAlign: 'center' }}>
                    {item.color === 'blue' ? 'Call Now' : 'Request Help'}
-                 </button>
+                 </a>
               </div>
             ))}
 
             <div className="sos-card">
                <div className="sos-content-wrapper">
                  <h3 className="sos-title">One-Tap SOS</h3>
-                 <p className="sos-desc">Send your real-time location to local authorities and emergency contacts instantly.</p>
+                 <p className="sos-desc">Share location & alert duty lawyers instantly.</p>
                  <button className="btn-sos-activate">
                    ACTIVATE SOS
                  </button>
@@ -133,81 +162,67 @@ const WomensRightsPage = () => {
           </motion.div>
         </section>
 
-        {/* Knowledge Base */}
-        <section className="knowledge-base-section">
-          <motion.div 
-            className="women-container"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="section-header-row">
-              <div className="section-title-group">
-                <h2 className="section-main-title">Essential Rights <span>Knowledge Base</span></h2>
-                <p className="section-sub-title">Navigate the legal framework with expert-curated guides.</p>
-              </div>
-              <button className="btn-text-primary">View All Documentation</button>
-            </div>
-
-            <div className="knowledge-grid">
-              <div className="knowledge-standard-group">
-                {knowledgeCategories.filter(c => !c.image).map((cat, idx) => (
-                  <div key={idx} className="knowledge-card">
-                    <span className="material-icons knowledge-icon">{cat.icon}</span>
-                    <h4 className="knowledge-title">{cat.title}</h4>
-                    <p className="knowledge-desc">{cat.description}</p>
-                    <div className="knowledge-tags">
-                      {cat.tags?.map(tag => (
-                        <span key={tag} className="tag-pill">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="knowledge-featured-group">
-                <div className="featured-card">
-                   <span className="material-icons knowledge-icon">groups</span>
-                   <h4 className="knowledge-title">Marriage & Family Law</h4>
-                   <p className="knowledge-desc">Expert guidance on divorce proceedings, maintenance, and inheritance laws.</p>
-                   <div className="featured-image-container">
-                     <img src={knowledgeCategories[1].image} alt="Family Law" className="featured-image" />
-                   </div>
-                   <button className="btn-featured-action">
-                     Access Library
-                   </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Immediate Actions */}
+        {/* Immediate Actions - What to do right now PRD 5.16 */}
         <section className="immediate-actions-section">
           <motion.div 
-            className="women-container flex-center-col"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, filter: "blur(0px)" }}
+            className="women-container"
+            initial={{ opacity: 0, filter: "blur(10px)", y: 50 }}
+            whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 1 }}
           >
-            <h2 className="section-main-title centered">Crisis Response <span>Immediate Actions</span></h2>
-            <div className="actions-step-grid">
-              <div className="actions-connecting-line" />
-              {[
-                { step: "01", title: "Ensure Safety", desc: "Relocate to a public space or trusted shelter immediately." },
-                { step: "02", title: "Gather Evidence", desc: "Store photos, screenshots, and recordings in a hidden digital vault." },
-                { step: "03", title: "File an e-FIR", desc: "Use our guided portal to draft a zero-FIR valid at any station." },
-                { step: "04", title: "Seek Legal Aid", desc: "Connect with a pro-bono advocate from our verified network." }
-              ].map((item, idx) => (
-                <div key={idx} className="action-step-item">
-                  <div className="step-number-bubble">
-                    {idx + 1}
-                  </div>
-                  <h5 className="step-title">{item.title}</h5>
-                  <p className="step-desc">{item.desc}</p>
-                </div>
+            <div className="section-header-row" style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+              <div className="section-title-group">
+                <h2 className="section-main-title">What to do <span>RIGHT NOW</span></h2>
+                <p className="section-sub-title">Select your situation for an immediate action protocol.</p>
+              </div>
+            </div>
+
+            <div className="safety-tabs">
+              {Object.keys(safetySections).map(tab => (
+                <button 
+                  key={tab}
+                  className={`safety-tab-btn ${activeTab === tab ? 'active' : ''}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
               ))}
+            </div>
+
+            <div className="safety-action-content">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="safety-card-active"
+                >
+                  <div className="safety-card-header">
+                    <h3>{safetySections[activeTab].title}</h3>
+                    <p>{safetySections[activeTab].desc}</p>
+                  </div>
+                  <div className="actions-step-grid" style={{ marginTop: '2rem' }}>
+                    <div className="actions-connecting-line" />
+                    {safetySections[activeTab].steps.map((stepStr, idx) => {
+                      const stepMatch = stepStr.match(/^(\d+)\.\s(.*)$/);
+                      const stepNum = stepMatch ? stepMatch[1] : (idx + 1);
+                      const stepText = stepMatch ? stepMatch[2] : stepStr;
+
+                      return (
+                        <div key={idx} className="action-step-item">
+                          <div className="step-number-bubble" style={{ background: '#ef4444', color: 'white', borderColor: '#b91c1c' }}>
+                            0{stepNum}
+                          </div>
+                          <p className="step-desc" style={{ color: '#e2e8f0', fontSize: '1.05rem', fontWeight: 500, lineHeight: 1.6 }}>{stepText}</p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
         </section>
@@ -231,15 +246,15 @@ const WomensRightsPage = () => {
                          </div>
                          <div className="ai-header-text">
                             <h3 className="ai-title">Ask NyayaSarthi AI</h3>
-                            <p className="ai-subtitle">Your 24/7 Digital Legal Consultant</p>
+                            <p className="ai-subtitle">Completely confidential context generation</p>
                          </div>
                       </div>
                       <div className="ai-promo-examples">
                          <p className="ai-example-quote">
-                           "How do I file a workplace harassment complaint without losing my job?"
+                           "Prepare a situation summary that I can instantly share with a duty lawyer."
                          </p>
                          <div className="ai-chips-group">
-                            {['Domestic Violence Help', 'Inheritance Laws', 'Cyber Stalking'].map(chip => (
+                            {['Draft Complaint', 'Find Nearest Station', 'Explain My Rights'].map(chip => (
                               <button key={chip} className="ai-action-chip">
                                 {chip}
                               </button>
@@ -249,18 +264,12 @@ const WomensRightsPage = () => {
                       <div className="ai-input-component">
                          <input 
                           type="text" 
-                          placeholder="Type your legal query here..." 
+                          placeholder="Type your query securely here..." 
                           className="ai-text-input"
                          />
                          <button className="ai-btn-send">
                             <span className="material-icons">send</span>
                          </button>
-                      </div>
-                   </div>
-                   <div className="ai-promo-visual">
-                      <div className="ai-visual-placeholder">
-                         <div className="ai-visual-pulse" />
-                         Case Intelligence Interface Visualization
                       </div>
                    </div>
                 </div>

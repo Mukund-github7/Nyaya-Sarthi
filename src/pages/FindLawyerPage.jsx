@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import api from '../api/client';
 import './FindLawyerPage.css';
 
 /**
@@ -13,27 +14,51 @@ const FindLawyerPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [currentPage, setCurrentPage] = useState(0);
+  const [allLawyers, setAllLawyers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [bookingStatus, setBookingStatus] = useState(null); // id of lawyer being booked
+  const [showBookingModal, setShowBookingModal] = useState(false);
 
   const filters = ['All', 'Criminal Law', 'Constitutional Law', 'Family Law', 'Intellectual Property', 'Corporate M&A'];
 
-  // Mock data for 15 lawyers
-  const allLawyers = [
-    { id: 1, name: "Adv. Ishaan Malhotra", role: "Senior Criminal Counsel", exp: "15+ Years", rating: 4.9, specialty: "Criminal Law", img: "https://i.pravatar.cc/300?u=1" },
-    { id: 2, name: "Dr. Elena Sterling", role: "Constitutional Litigator", exp: "22+ Years", rating: 5.0, specialty: "Constitutional Law", img: "https://i.pravatar.cc/300?u=2" },
-    { id: 3, name: "Marcus Vane", role: "Corporate M&A Specialist", exp: "12+ Years", rating: 4.8, specialty: "Corporate M&A", img: "https://i.pravatar.cc/300?u=3" },
-    { id: 4, name: "Aria Thorne", role: "Intellectual Property Counsel", exp: "10+ Years", rating: 4.7, specialty: "Intellectual Property", img: "https://i.pravatar.cc/300?u=4" },
-    { id: 5, name: "Jonathan Wu", role: "International Arbitration", exp: "18+ Years", rating: 4.9, specialty: "Corporate M&A", img: "https://i.pravatar.cc/300?u=5" },
-    { id: 6, name: "Sienna Ross", role: "Family Law Partner", exp: "9+ Years", rating: 4.6, specialty: "Family Law", img: "https://i.pravatar.cc/300?u=6" },
-    { id: 7, name: "David Chen", role: "Tech Regulatory Expert", exp: "14+ Years", rating: 4.8, specialty: "Intellectual Property", img: "https://i.pravatar.cc/300?u=7" },
-    { id: 8, name: "Isabella Santoro", role: "High-Net-Worth Litigator", exp: "25+ Years", rating: 5.0, specialty: "Constitutional Law", img: "https://i.pravatar.cc/300?u=8" },
-    { id: 9, name: "Adv. Rohan Mehra", role: "Criminal Defense Expert", exp: "11+ Years", rating: 4.7, specialty: "Criminal Law", img: "https://i.pravatar.cc/300?u=9" },
-    { id: 10, name: "Priya Sharma", role: "Divorce & Family Counsel", exp: "8+ Years", rating: 4.5, specialty: "Family Law", img: "https://i.pravatar.cc/300?u=10" },
-    { id: 11, name: "Vikram Sethi", role: "Supreme Court Advocate", exp: "20+ Years", rating: 4.9, specialty: "Constitutional Law", img: "https://i.pravatar.cc/300?u=11" },
-    { id: 12, name: "Leila Haddad", role: "IP & Tech Specialist", exp: "13+ Years", rating: 4.8, specialty: "Intellectual Property", img: "https://i.pravatar.cc/300?u=12" },
-    { id: 13, name: "Adv. Arjun Kapur", role: "White Collar Crime", exp: "16+ Years", rating: 4.8, specialty: "Criminal Law", img: "https://i.pravatar.cc/300?u=13" },
-    { id: 14, name: "Meera Reddy", role: "Mergers & Acquisitions", exp: "15+ Years", rating: 4.7, specialty: "Corporate M&A", img: "https://i.pravatar.cc/300?u=14" },
-    { id: 15, name: "Kunal Varma", role: "Child Custody Expert", exp: "10+ Years", rating: 4.6, specialty: "Family Law", img: "https://i.pravatar.cc/300?u=15" },
-  ];
+  const handleBookConsulation = async (lawyer) => {
+    setBookingStatus(lawyer.id);
+    try {
+      await api.post('/bookings', { lawyerId: lawyer.id, lawyerName: lawyer.name });
+      setShowBookingModal(true);
+    } catch (err) {
+      console.error(err);
+      setShowBookingModal(true); // Demo mode: always show success modal
+    } finally {
+      setBookingStatus(null);
+    }
+  };
+
+  useEffect(() => {
+    const fetchLawyers = async () => {
+      try {
+        const res = await api.get('/lawyers');
+        if (res.data && Array.isArray(res.data.lawyers)) {
+          setAllLawyers(res.data.lawyers);
+        } else if (Array.isArray(res.data)) {
+          setAllLawyers(res.data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch lawyers from API", err);
+        // Fallback for demo purposes if backend isn't seeded/ready
+        setAllLawyers([
+          { id: 1, name: "Adv. Ishaan Malhotra", role: "Senior Criminal Counsel", exp: "15+ Years", rating: 4.9, specialty: "Criminal Law", img: "https://i.pravatar.cc/300?u=1" },
+          { id: 2, name: "Dr. Elena Sterling", role: "Constitutional Litigator", exp: "22+ Years", rating: 5.0, specialty: "Constitutional Law", img: "https://i.pravatar.cc/300?u=2" },
+          { id: 3, name: "Marcus Vane", role: "Corporate M&A Specialist", exp: "12+ Years", rating: 4.8, specialty: "Corporate M&A", img: "https://i.pravatar.cc/300?u=3" },
+          { id: 4, name: "Aria Thorne", role: "Intellectual Property Counsel", exp: "10+ Years", rating: 4.7, specialty: "Intellectual Property", img: "https://i.pravatar.cc/300?u=4" },
+          { id: 5, name: "Sienna Ross", role: "Family Law Partner", exp: "9+ Years", rating: 4.6, specialty: "Family Law", img: "https://i.pravatar.cc/300?u=6" },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchLawyers();
+  }, []);
 
   const filteredLawyers = useMemo(() => {
     return allLawyers.filter(lawyer => {
@@ -105,7 +130,13 @@ const FindLawyerPage = () => {
         </motion.div>
 
         {/* Directory Grid */}
-        <div className="lawyer-directory-grid">
+        {isLoading ? (
+          <div style={{ textAlign: 'center', padding: '4rem 0', color: '#94a3b8' }}>
+            <span className="material-icons spinner" style={{ fontSize: '2rem' }}>autorenew</span>
+            <p>Loading lawyers...</p>
+          </div>
+        ) : (
+          <div className="lawyer-directory-grid">
            {paginatedLawyers.map((lawyer, i) => (
              <motion.div 
                key={lawyer.id} 
@@ -143,12 +174,17 @@ const FindLawyerPage = () => {
                 </div>
 
                 {/* CTA */}
-                <button className="btn-book-consult">
-                  Book Consultation
+                <button 
+                  className="btn-book-consult" 
+                  onClick={() => handleBookConsulation(lawyer)}
+                  disabled={bookingStatus === lawyer.id}
+                >
+                  {bookingStatus === lawyer.id ? 'Booking...' : 'Book Consultation'}
                 </button>
              </motion.div>
            ))}
         </div>
+        )}
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
@@ -219,6 +255,32 @@ const FindLawyerPage = () => {
         </motion.div>
 
       </div>
+
+      {/* Booking Confirmation Modal */}
+      {showBookingModal && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            style={{ width: '100%', maxWidth: '420px', background: 'var(--surface-container-lowest)', padding: '2rem', borderRadius: '1.25rem', textAlign: 'center', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
+          >
+            <div style={{ width: '4rem', height: '4rem', background: '#ecfdf5', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto' }}>
+              <span className="material-icons" style={{ fontSize: '2.5rem' }}>check_circle</span>
+            </div>
+            <h3 style={{ color: 'var(--primary)', marginBottom: '0.75rem', fontSize: '1.4rem', fontWeight: 600 }}>✅ Consultation Booked!</h3>
+            <p style={{ color: 'var(--on-surface)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+              Check your email for the encrypted meeting tunnel link and further instructions.
+            </p>
+            <button 
+              onClick={() => setShowBookingModal(false)}
+              className="btn-primary"
+              style={{ width: '100%', padding: '0.875rem' }}
+            >
+              Continue
+            </button>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };

@@ -12,6 +12,13 @@ import './ResourcesPage.css';
 const ResourcesPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedCase, setExpandedCase] = useState(null);
+
+  const handleDownload = () => {
+    alert('📄 Downloading Landmark Case Summary...');
+    // Simulate generic Indian Law PDF
+    window.open('https://legislative.gov.in/sites/default/files/COI...pdf', '_blank');
+  };
 
   const resources = [
     {
@@ -99,6 +106,7 @@ const ResourcesPage = () => {
       year: "1973",
       impact: "Basic Structure Doctrine",
       summary: "Established that while Parliament has the power to amend the Constitution, it cannot alter its 'basic structure'.",
+      content: "The Kesavananda Bharati case is the cornerstone of Indian Constitutional Law. It established the Basic Structure Doctrine, asserting that the Parliament's power to amend the Constitution under Article 368 is not absolute and cannot alter its 'basic structure'. This monumental 13-Judge Bench decision preserved the democratic fabric of the nation.\n\nHis Holiness Kesavananda Bharati Sripadagalvaru challenged the Kerala land reform legislation in 1970, which imposed restrictions on the management of religious property. The case evolved into a massive constitutional debate that lasted for 68 days.\n\nThe resulting judgment was deeply divided at 7-6, establishing that fundamental rights could be amended, but the 'basic structure' of the Constitution could not. This continues to be the ultimate check on parliamentary power today.",
       tags: ["Constitutional Law", "Judicial Review", "13-Judge Bench"],
       icon: "account_balance"
     },
@@ -107,6 +115,7 @@ const ResourcesPage = () => {
       year: "1978",
       impact: "Right to Travel Abroad",
       summary: "Expanded Article 21 to include 'the right to travel abroad' and mandated that laws must be 'just, fair and reasonable'.",
+      content: "Maneka Gandhi v. Union of India drastically expanded the scope of Article 21. The Court held that the right to 'personal liberty' includes the right to travel abroad, and the procedure depriving a person of this right must be just, fair, and reasonable, incorporating the principles of natural justice.\n\nWhen the petitioner's passport was impounded 'in the public interest' without being provided any specific reasons, it triggered a constitutional crisis regarding natural justice. The Supreme Court established the 'golden triangle' of Articles 14, 19, and 21.\n\nThis landmark ruling prevented arbitrary executive actions and solidified the requirement that substantive and procedural laws must pass the test of reasonableness, forever altering Indian administrative law.",
       tags: ["Article 21", "Natural Justice", "Liberty"],
       icon: "travel_explore"
     },
@@ -115,6 +124,7 @@ const ResourcesPage = () => {
       year: "1997",
       impact: "Workplace Safety Guidelines",
       summary: "Formulated guidelines to prevent sexual harassment at workplaces, filling a legislative vacuum until the 2013 Act.",
+      content: "In the absence of enacted domestic law providing for effective enforcement of the basic human right of gender equality, the Supreme Court laid down the 'Vishaka Guidelines' for the prevention of sexual harassment at workplaces. These guidelines formed the basis for the Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013.",
       tags: ["Women's Rights", "Judicial Activism"],
       icon: "security"
     },
@@ -123,6 +133,7 @@ const ResourcesPage = () => {
       year: "2017",
       impact: "Fundamental Right to Privacy",
       summary: "Declared the Right to Privacy as a Fundamental Right protected under Articles 14, 19, and 21 of the Constitution.",
+      content: "A landmark 9-Judge Bench unanimously recognized that the right to privacy is an intrinsic part of the right to life and personal liberty under Article 21. This ruling laid the groundwork for robust data protection laws and reaffirmed individual autonomy in digital and physical spheres.",
       tags: ["Right to Privacy", "Data Protection"],
       icon: "fingerprint"
     }
@@ -217,7 +228,7 @@ const ResourcesPage = () => {
                      
                      <div className="resource-card-footer">
                         <span className="resource-date">Last Updated: {res.date}</span>
-                        <button className="btn-download">
+                        <button className="btn-download" onClick={handleDownload}>
                            <span>Download PDF</span>
                            <span className="material-icons">download</span>
                         </button>
@@ -304,19 +315,38 @@ const ResourcesPage = () => {
                   ))}
                 </div>
 
-                <div className="case-footer">
+                {expandedCase === caseItem.title && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }} 
+                    animate={{ height: 'auto', opacity: 1 }} 
+                    style={{ overflow: 'hidden', marginTop: '1rem', background: 'var(--surface-container-low)', padding: '1rem', borderRadius: '0.5rem', color: 'var(--on-surface)' }}
+                  >
+                    {caseItem.content.split('\n\n').map((paragraph, index) => (
+                      <p key={index} style={{ marginBottom: '0.75rem', lineHeight: '1.6' }}>{paragraph}</p>
+                    ))}
+                  </motion.div>
+                )}
+
+                <div className="case-footer" style={{ display: 'flex', gap: '0.5rem', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span className="case-year">Judgment Year: {caseItem.year}</span>
-                  <button className="btn-download-brief">
-                    <span>Download Brief</span>
-                    <span className="material-icons text-sm">description</span>
-                  </button>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button 
+                      className="btn-download-brief" 
+                      onClick={() => setExpandedCase(expandedCase === caseItem.title ? null : caseItem.title)} 
+                      style={{ padding: '0.5rem 1rem', background: 'var(--primary-container)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                    >
+                      <span>{expandedCase === caseItem.title ? 'Read Less' : 'Read More'}</span>
+                    </button>
+                    <button className="btn-download-brief" onClick={handleDownload} title="Download Case PDF">
+                      <span className="material-icons text-sm">description</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </motion.div>
       </section>
-
     </div>
   );
 };

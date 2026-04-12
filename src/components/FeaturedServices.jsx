@@ -170,8 +170,8 @@ const FeaturedServices = () => {
 
               <button className="featured-card-action" onClick={() => {
                 if (card.title === 'AI Legal Assistant') navigate('/chat');
-                else if (card.title === 'Lawyer Marketplace') navigate('/lawyers');
-                else if (card.title === 'Safety & Emergency') navigate('/women');
+                else if (card.title === 'Lawyer Marketplace') navigate('/marketplace');
+                else if (card.title === 'Safety & Emergency') navigate('/safety');
                 else navigate('/laws');
               }}>
                 <span>Explore App</span>

@@ -49,8 +49,8 @@ const FooterSection = () => {
                 { name: 'Home', path: '/' },
                 { name: 'Laws', path: '/laws' },
                 { name: 'AI Chatbot', path: '/chat' },
-                { name: "Women's Rights", path: '/women' },
-                { name: 'Lawyer Connect', path: '/lawyers' },
+                { name: "Women's Rights", path: '/safety' },
+                { name: 'Lawyer Connect', path: '/marketplace' },
                 { name: 'Student Hub', path: '/resources' }
               ].map((link) => (
                 <li key={link.name}>

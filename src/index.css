@@ -225,3 +225,34 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   box-shadow: var(--shadow-ambient);
 }
+
+/* Global Floating SOS Button */
+.floating-sos-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #ef4444; /* red-500 */
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.5), 0 8px 10px -6px rgba(239, 68, 68, 0.5);
+  z-index: 1000;
+  animation: heartbeat-pulse 2s infinite;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.floating-sos-btn:hover {
+  transform: scale(1.05);
+  background-color: #dc2626; /* red-600 */
+}
+
+@keyframes heartbeat-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

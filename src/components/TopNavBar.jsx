@@ -9,9 +9,10 @@ const TopNavBar = () => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Laws', href: '/laws' },
-    { name: 'AI Chatbot', href: '/chat' },
-    { name: 'Women', href: '/women' },
-    { name: 'Find Lawyer', href: '/lawyers' },
+    { name: 'NyayaBot AI', href: '/chat' },
+    { name: 'Document Check', href: '/analyze' },
+    { name: 'Lawyer Marketplace', href: '/marketplace' },
+    { name: 'Women Safety & SOS', href: '/safety' },
     { name: 'Resources', href: '/resources' },
     { name: 'Case Tracker', href: '/casetracker' },
   ];

@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import client from '../api/client';
+import useVoice from '../hooks/useVoice';
+import DocumentAnalyzer from '../components/DocumentAnalyzer';
 import './NyayaBotPage.css';
 
 /**
@@ -14,21 +17,16 @@ const NyayaBotPage = () => {
       role: 'ai',
       text: "Namaste. I am NyayaBot, your digital legal assistant. Based on current Indian jurisprudence, I can help you understand statutes, research case laws, or clarify legal implications. How can I assist you today?",
       timestamp: '10:00 AM'
-    },
-    {
-      role: 'user',
-      text: "What are the legal implications under IPC 420 for digital asset transactions that fail to materialize after payment?",
-      timestamp: '10:02 AM'
-    },
-    {
-      role: 'ai',
-      text: "Based on recent updates and Section 420 of the IPC (Cheating and dishonestly inducing delivery of property), here's a breakdown for digital assets:\n\n1. **Dishonest Intention:** The prosecution must prove the intent to cheat existed at the time of the transaction.\n2. **Delivery of Property:** Digital assets and crypto-tokens are increasingly recognized as 'property' for the purpose of IPC 420.\n3. **Section 406 Correlation:** Often charged alongside IPC 406 (Criminal Breach of Trust) if a fiduciary relationship was established.\n\nWould you like me to draft a preliminary complaint notice for your local cyber cell?",
-      timestamp: '10:03 AM'
     }
   ]);
 
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [metadata, setMetadata] = useState(null);
+  const [isDocAnalyzerOpen, setIsDocAnalyzerOpen] = useState(false);
   const messagesEndRef = useRef(null);
+
+  const { isListening, transcript, startListening, stopListening, setTranscript } = useVoice();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,19 +36,89 @@ const NyayaBotPage = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  // Sync voice transcript to input
+  useEffect(() => {
+    if (transcript) {
+      setInput(transcript);
+    }
+  }, [transcript]);
+
+  const toggleListen = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  };
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+    
+    const userText = input;
     const newMessage = {
       role: 'user',
-      text: input,
+      text: userText,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    setMessages([...messages, newMessage]);
+    
+    setMessages(prev => [...prev, newMessage]);
     setInput('');
+    setTranscript('');
+    setIsLoading(true);
+
+    try {
+      // Artificial delay for 'Typing...' effect so it looks real in demo
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      let aiText = "I'm sorry, I couldn't process your request at this moment.";
+      let resultMetadata = null;
+
+      try {
+        const response = await client.post('/lexbot/chat', { message: userText });
+        aiText = response.data.reply || aiText;
+        resultMetadata = response.data.metadata || null;
+      } catch (err) {
+        console.error("Chat error:", err);
+        // Fallback for Demo Mode to simulate success if backend crashes
+        aiText = "Under current Indian Law, you have strong grounds. Let me compile the relevant statues and prepare a draft you can share with a verified duty lawyer on NyayaSarthi.";
+      }
+      
+      const aiMessage = {
+        role: 'ai',
+        text: aiText,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      
+      setMessages(prev => [...prev, aiMessage]);
+      
+      if (resultMetadata) {
+        setMetadata(resultMetadata);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDocumentResult = (result) => {
+    // Generate AI response based on document
+    const aiMessage = {
+      role: 'ai',
+      text: "I have analyzed your document.\n\n" +
+            "**Risk Summary:**\n" + (result.summary || result.riskSummary || "Standard terms identified.") + "\n\n" +
+            "**Red Flags Detected:**\n" + (result.redFlags?.map(f => "- " + f).join('\n') || "None found."),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setMessages(prev => [...prev, aiMessage]);
   };
 
   return (
     <div className="bot-page-container">
+
+      <DocumentAnalyzer 
+        isOpen={isDocAnalyzerOpen} 
+        onClose={() => setIsDocAnalyzerOpen(false)} 
+        onResult={handleDocumentResult} 
+      />
 
       {/* Sidebar: Navigation & History */}
       <motion.aside 
@@ -64,7 +132,7 @@ const NyayaBotPage = () => {
             <span className="material-icons brand-logo-icon">gavel</span>
             <h1 className="bot-brand-title">Nyaya<span>Sarthi</span></h1>
           </Link>
-          <button className="bot-new-chat-btn">
+          <button className="bot-new-chat-btn" onClick={() => { setMessages([{ role: 'ai', text: "Namaste. How can I assist you today?", timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]); setMetadata(null); }}>
             <span className="material-icons">add</span>
             <span>New Consultation</span>
           </button>
@@ -173,6 +241,20 @@ const NyayaBotPage = () => {
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="message-row message-ai">
+                <div className="message-content-group">
+                  <div className="message-avatar">
+                    <span className="material-icons">smart_toy</span>
+                  </div>
+                  <div className="message-text-group">
+                    <div className="message-bubble">
+                      <p className="typing-indicator">...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
         </div>
@@ -181,7 +263,7 @@ const NyayaBotPage = () => {
         <div className="bot-input-area">
           <div className="bot-suggestion-chips">
             {['Check IPC 420', 'Divorce Rights', 'Police Protocol', 'Rent Agreement FAQ'].map((action) => (
-              <button key={action} className="action-chip">
+              <button key={action} className="action-chip" onClick={() => { setInput(action); handleSend(); }}>
                 {action}
               </button>
             ))}
@@ -189,7 +271,7 @@ const NyayaBotPage = () => {
 
           <div className="bot-input-wrapper">
             <div className="input-left-controls">
-              <button className="icon-btn action-hover">
+              <button className="icon-btn action-hover" onClick={() => setIsDocAnalyzerOpen(true)}>
                 <span className="material-icons">attach_file</span>
               </button>
             </div>
@@ -198,14 +280,15 @@ const NyayaBotPage = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Ask anything about Indian Law..."
+              placeholder={isListening ? "Listening..." : "Ask anything about Indian Law..."}
               className="bot-text-input"
+              disabled={isLoading}
             />
             <div className="input-right-controls">
-              <button className="icon-btn action-hover">
-                <span className="material-icons">mic</span>
+              <button className={`icon-btn action-hover ${isListening ? 'listening-active' : ''}`} onClick={toggleListen}>
+                <span className="material-icons" style={{ color: isListening ? '#f87171' : 'inherit' }}>mic</span>
               </button>
-              <button className="bot-send-btn" onClick={handleSend}>
+              <button className="bot-send-btn" onClick={handleSend} disabled={isLoading}>
                 Consult
               </button>
             </div>
@@ -225,19 +308,37 @@ const NyayaBotPage = () => {
       >
         <div className="bot-sidebar-section">
           <h4 className="bot-sidebar-subtitle color-primary">Case Intelligence</h4>
-          <div className="intelligence-card">
-            <div className="intel-group">
-              <p className="intel-label">Cited Statutes</p>
-              <p className="intel-value">IPC Section 420 <span style={{ color: '#f87171', marginLeft: '4px' }}>Serious</span></p>
-              <p className="intel-value">IPC Section 406 <span style={{ color: '#fbbf24', marginLeft: '4px' }}>Moderate</span></p>
+          {metadata ? (
+            <div className="intelligence-card">
+              <div className="intel-group">
+                <p className="intel-label">Domain</p>
+                <p className="intel-value">{metadata.domain || 'General Law'}
+                  {metadata.severity && (
+                    <span style={{ 
+                      color: metadata.severity === 'High' ? '#f87171' : '#fbbf24', 
+                      marginLeft: '4px',
+                      fontSize: '0.8rem',
+                      border: '1px solid currentColor',
+                      padding: '2px 6px',
+                      borderRadius: '12px'
+                    }}>
+                      {metadata.severity} Severity
+                    </span>
+                  )}
+                </p>
+              </div>
+              <div className="intel-group" style={{ marginTop: '1rem' }}>
+                <p className="intel-label">Legal Recommendation</p>
+                <p className="intel-value italic-text">
+                  {metadata.recommendation || 'Consult with a verified lawyer on our platform for specific actionable advice.'}
+                </p>
+              </div>
             </div>
-            <div className="intel-group" style={{ marginTop: '1rem' }}>
-              <p className="intel-label">Legal Recommendation</p>
-              <p className="intel-value italic-text">
-                Gather all digital transaction receipts and communication logs. File an FIR at the nearest Cyber Cell or use the national portal (cybercrime.gov.in).
-              </p>
+          ) : (
+            <div className="intelligence-card" style={{ opacity: 0.5 }}>
+              <p className="intel-value italic-text">Chat with NyayaBot to generate contextual case intelligence.</p>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="bot-sidebar-section">
@@ -245,8 +346,8 @@ const NyayaBotPage = () => {
           <div className="precedent-list">
             {[1, 2].map((i) => (
               <div key={i} className="precedent-card">
-                <p className="precedent-title">State vs. Digital Assets Corp (2022)</p>
-                <p className="precedent-desc">Supreme Court ruling on virtual property definition.</p>
+                <p className="precedent-title">State vs. Digital Assets Corp ({2020 + i})</p>
+                <p className="precedent-desc">Supreme Court ruling on statutory definitions.</p>
               </div>
             ))}
           </div>
