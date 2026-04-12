@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LawAssist India | Know Your Rights</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#aec6ff",
+                    "on-error": "#ffffff",
+                    "tertiary": "#012300",
+                    "secondary-fixed": "#ffdcc2",
+                    "on-surface": "#191c1d",
+                    "on-primary-container": "#7999dc",
+                    "on-background": "#191c1d",
+                    "inverse-surface": "#2e3132",
+                    "surface": "#f8f9fa",
+                    "surface-dim": "#d9dadb",
+                    "tertiary-container": "#023b00",
+                    "on-primary-fixed": "#001a42",
+                    "surface-container-highest": "#e1e3e4",
+                    "inverse-primary": "#aec6ff",
+                    "tertiary-fixed": "#8dfc75",
+                    "primary": "#001b44",
+                    "primary-fixed": "#d8e2ff",
+                    "on-surface-variant": "#434750",
+                    "secondary-container": "#fe9832",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#6d3a00",
+                    "on-secondary-fixed": "#2e1500",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#747781",
+                    "on-tertiary-fixed-variant": "#035300",
+                    "surface-bright": "#f8f9fa",
+                    "surface-container": "#edeeef",
+                    "on-secondary-container": "#683700",
+                    "tertiary-fixed-dim": "#72de5c",
+                    "secondary": "#8f4e00",
+                    "on-tertiary-fixed": "#012200",
+                    "surface-container-high": "#e7e8e9",
+                    "on-primary-fixed-variant": "#224583",
+                    "background": "#f8f9fa",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e1e3e4",
+                    "primary-container": "#002f6c",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#44af33",
+                    "outline-variant": "#c4c6d2",
+                    "inverse-on-surface": "#f0f1f2",
+                    "secondary-fixed-dim": "#ffb77a",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-tint": "#3c5d9c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .font-serif { font-family: 'Newsreader', serif; }
+      .font-sans { font-family: 'Inter', sans-serif; }
+      body { background-color: #f8f9fa; color: #191c1d; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+<!-- Top Navigation -->
+<nav class="bg-white/80 dark:bg-slate-950/80 backdrop-blur-md text-blue-900 dark:text-blue-400 docked full-width top-0 sticky z-50 shadow-xl shadow-blue-900/5 dark:shadow-none">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-serif italic text-blue-900 dark:text-blue-200" href="#">LawAssist India</a>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-blue-900 dark:text-blue-400 font-bold border-b-2 border-orange-600 font-medium tracking-wide" href="#">Home</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-all duration-300 font-medium tracking-wide" href="#">Laws</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-all duration-300 font-medium tracking-wide" href="#">AI Chatbot</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-all duration-300 font-medium tracking-wide" href="#">Women</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-all duration-300 font-medium tracking-wide" href="#">Find Lawyer</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-1.5 border border-transparent focus-within:border-primary-container transition-all">
+<span class="material-symbols-outlined text-outline text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48" placeholder="Search laws, cases..." type="text"/>
+</div>
+<button class="material-symbols-outlined p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all duration-300">gavel</button>
+<div class="flex gap-2">
+<button class="px-5 py-2 text-sm font-semibold text-primary hover:bg-slate-100 rounded-lg transition-all">Login</button>
+<button class="px-5 py-2 text-sm font-semibold bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg shadow-lg shadow-primary/20 hover:scale-95 transition-all duration-200">Register</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative min-h-[870px] flex items-center overflow-hidden bg-primary text-white">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="Stately bronze scales of justice in a neoclassical courtroom with sunlight filtering through large windows and a subtle Indian flag silhouette overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUuw8x67DJxCnN8PGo_Q_gze6mMkD3UJ25QynK_g5K40sbzZ6FB72fz7UOEpqUvrqaSXHmQrx6AWddiCWQM3zU2WjgZRdtCx_ig4-6D8UzMoDpXsBZn8l1hiKP7qHKQmYWF6wJ43ubck44IDR0cc546FzAhE4KLLOZPA5c7Vt7LI__YRPRqft7v-Vo9W4K8Ph3VUQ_xEHVv2Cvd88Dnc4wlPJ1IJJjBXoviLrFXeyJOIfkbKgsxikSMh6WvVfpbYFwtjze5FcP52I"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+</div>
+<div class="container mx-auto px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary/20 border border-secondary/30 rounded-full text-secondary-fixed-dim text-xs font-bold tracking-widest uppercase">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    Protecting 1.4 Billion Citizens
+                </div>
+<h1 class="text-6xl md:text-8xl font-serif leading-tight">
+                    Know Your <span class="italic text-secondary-fixed-dim underline decoration-secondary underline-offset-8">Rights.</span><br/>Stay Protected.
+                </h1>
+<p class="text-xl text-blue-100/80 max-w-lg leading-relaxed font-body">
+                    Empowering Indian citizens with accessible legal knowledge, AI-driven assistance, and direct connections to verified legal professionals.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-secondary text-white font-bold rounded-xl flex items-center gap-3 hover:bg-secondary/90 transition-all shadow-xl shadow-secondary/20">
+<span class="material-symbols-outlined">smart_toy</span>
+                        Ask AI Assistant
+                    </button>
+<button class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-xl flex items-center gap-3 hover:bg-white/20 transition-all">
+<span class="material-symbols-outlined">menu_book</span>
+                        Browse Laws
+                    </button>
+</div>
+</div>
+<div class="hidden md:block relative">
+<div class="absolute -inset-10 bg-secondary/10 blur-3xl rounded-full"></div>
+<div class="bg-surface-container-lowest/10 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+</div>
+<div>
+<p class="text-sm opacity-60">Legal Awareness Portal</p>
+<p class="font-bold">Ministry of Law &amp; Justice</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full w-3/4 bg-tertiary-fixed-dim"></div>
+</div>
+<p class="text-sm italic">"Justice should not only be done, but should manifestly and undoubtedly be seen to be done."</p>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Categories Grid -->
+<section class="py-24 bg-surface px-8">
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="text-4xl font-serif text-primary mb-4 italic">Browse Laws by Category</h2>
+<p class="text-slate-600 max-w-xl">Comprehensive legal guides categorized for easy understanding and navigation of the Indian Penal Code and beyond.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 group">
+                    View All Categories <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Criminal Law -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-red-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-red-600 text-3xl">gavel</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Criminal Law</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Understanding the IPC, CrPC, and your rights during arrest or investigation.</p>
+<a class="inline-flex items-center gap-2 text-red-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<!-- Civil Law -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-blue-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-blue-600 text-3xl">balance</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Civil Law</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Family disputes, property rights, contracts, and torts in the Indian legal system.</p>
+<a class="inline-flex items-center gap-2 text-blue-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<!-- Cyber Law -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-purple-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-purple-600 text-3xl">security</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Cyber Law</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">IT Act, digital fraud protection, privacy rights, and online safety protocols.</p>
+<a class="inline-flex items-center gap-2 text-purple-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<!-- Traffic Law -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-orange-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-orange-600 text-3xl">traffic</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Traffic Law</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Motor Vehicle Act updates, traffic violation fines, and driver responsibilities.</p>
+<a class="inline-flex items-center gap-2 text-orange-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<!-- Consumer Law -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-green-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-green-600 text-3xl">shopping_cart</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Consumer Law</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Protection against unfair trade practices and filing consumer court complaints.</p>
+<a class="inline-flex items-center gap-2 text-green-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<!-- Fundamental Rights -->
+<div class="bg-white p-8 rounded-2xl shadow-sm border-b-4 border-amber-500 hover:-translate-y-2 transition-all duration-300">
+<div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-amber-600 text-3xl">account_balance</span>
+</div>
+<h3 class="text-2xl font-serif font-bold text-primary mb-3">Fundamental Rights</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Exploring the core pillars of the Indian Constitution and individual liberties.</p>
+<a class="inline-flex items-center gap-2 text-amber-600 font-bold group" href="#">
+                        Explore <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Bento Section -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 auto-rows-[minmax(300px,auto)]">
+<!-- AI Chatbot - Large Card -->
+<div class="lg:col-span-8 bg-gradient-to-br from-primary-container to-primary rounded-3xl p-10 text-white relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10 max-w-md">
+<h3 class="text-4xl font-serif mb-6">AI Powered Legal Chatbot</h3>
+<p class="text-lg text-blue-100 opacity-80 mb-8 leading-relaxed">Get instant answers to your legal queries in simple language. Our AI is trained on 70+ years of Indian Case Law.</p>
+<button class="px-8 py-3 bg-white text-primary font-bold rounded-xl hover:scale-105 transition-all">Start a Conversation</button>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-40 lg:opacity-100 mix-blend-screen pointer-events-none">
+<img class="w-full h-full object-contain object-bottom" data-alt="A friendly, glowing humanoid robot holographic avatar dressed in a professional blazer, representing an AI legal advisor in a clean high-tech interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSAL8P21mqid7beDES152fjlucLEQHGKKbLzYv_myjauc1hwC2QQB8pyhst00HvAgIlXt3uvuSGjLsgQocY_g67-TcamDRNF9LjRHFA9uhQaEzlovIzld8zM9T5tl2ZdA-vHvnkjSxgSO3Q8rwX5penUAeRe59KwaXIEuteYIcMlgOD1QWGST7_5QXGDLoef5J_R_hSvdQhMkmqvUd4WSkIbcEJbt5620FWb5VAXai-86BqHTyNxTH9fca4kX_aJVbwGy16AU50TE"/>
+</div>
+</div>
+<!-- Women's Safety - Vertical Card -->
+<div class="lg:col-span-4 bg-white rounded-3xl p-8 shadow-xl shadow-blue-900/5 flex flex-col">
+<div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-red-600 text-4xl" data-weight="fill">female</span>
+</div>
+<h3 class="text-3xl font-serif text-primary mb-6">Women's Safety &amp; Rights</h3>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-slate-700">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">verified</span>
+                        Protection of Women from Domestic Violence Act
+                    </li>
+<li class="flex items-center gap-3 text-slate-700">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">verified</span>
+                        Maternity Benefit Act
+                    </li>
+<li class="flex items-center gap-3 text-slate-700">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">verified</span>
+                        POSH Act Guidelines
+                    </li>
+</ul>
+<button class="mt-auto w-full py-4 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 transition-colors">Explore All Acts</button>
+</div>
+<!-- Find Lawyer - Horizontal Card -->
+<div class="lg:col-span-6 bg-white rounded-3xl p-8 shadow-xl shadow-blue-900/5 grid md:grid-cols-2 gap-8 items-center border border-primary/5">
+<div>
+<h3 class="text-3xl font-serif text-primary mb-4">Connect with Lawyers</h3>
+<p class="text-slate-600 mb-6">Browse profiles of verified legal professionals near you and book consultations instantly.</p>
+<div class="flex -space-x-3 overflow-hidden mb-6">
+<img alt="Lawyer 1" class="inline-block h-10 w-10 rounded-full ring-4 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2OmqJxLzmdS05SAwIzV6-TPaHpKMGhXGJICFqbXUzA9DIK_Qkg7P5yawiL9E-RXqG8BarAb2tH2hTagAED8W0NeMdgh9TcrRrra3m03a30SPu8hBWCTF5kJK0yIz6U7mIXK_IZhqnEemdZnxkBxmP-shr02blbRH-51ntrQNtDVjm35Xy_KtCRci2SOS6rFmcVQ9EMViiPAcmN6MnS5TQVy9ClqKLFDztYESe2ktu8NsE2AXJab2-mWKKgM1j2Ka8-9v7CNXQti0"/>
+<img alt="Lawyer 2" class="inline-block h-10 w-10 rounded-full ring-4 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtvBlmdvd5PIKXAJL7N9TSsNJtnNTtIsqIlji-s2F8CJYBGMBxnMVihIz8Mcom_qh-UBlL8U2nyR1DEpsaT055WH7Bw0Kq6uN9923yAujBuq0E07RfCAzsrOqLmh4pycaGgtMrfcuNS4rebvITOAG8pQyQhcVq4Zo8q56zdm8TZE9J52t43blLSFVre34OARhKl9ZuVkwpuahZi3eD5od6b9d6gXSSguoGsIkPbhAuAzLf2Abp47Nhajg2_TaUBN4lJwbh6jnkPoA"/>
+<img alt="Lawyer 3" class="inline-block h-10 w-10 rounded-full ring-4 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0M0EhFToTFW1XIQGyF-tClxWCMW-gMtmo9oEo2ZeEi7-spGFgDrB9jjxlrjKZcDUVqshkIugUMGesJEN8SegEZZVQgPHVIUKwYgdUyOGzq85xeDg6pkCng_hOIu0ndEiV2dNjoy1BdBWhNiNUt0uBDDAr8Ovul3fDHCixOS0cH5LkDjmPq2YWTKoslnTZTk_2wHNlvRbGWuX2dNR1e0xc6eLkEC83pA-17NI2fAGGM6CR2WaYL8am1OHIrG_C-KaTLHzgBYSnBuY"/>
+<div class="flex items-center justify-center h-10 w-10 rounded-full bg-slate-100 text-slate-500 text-xs font-bold ring-4 ring-white">500+</div>
+</div>
+<button class="font-bold text-primary flex items-center gap-2 group">Search Experts <span class="material-symbols-outlined group-hover:translate-x-1 transition-all">arrow_forward</span></button>
+</div>
+<div class="bg-surface-container rounded-2xl p-6 border-l-4 border-secondary">
+<p class="text-xs font-bold text-secondary tracking-widest uppercase mb-2">Featured Lawyer</p>
+<h4 class="font-bold text-lg">Adv. Priya Sharma</h4>
+<p class="text-sm text-slate-500 mb-4 italic">Supreme Court Practitioner</p>
+<div class="flex items-center gap-1 text-orange-500 mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star_half</span>
+<span class="text-slate-600 text-xs font-bold ml-1">4.8 (120 reviews)</span>
+</div>
+<button class="w-full py-2 bg-primary text-white text-sm font-bold rounded-lg">View Profile</button>
+</div>
+</div>
+<!-- Student Resources - Small Card -->
+<div class="lg:col-span-3 bg-tertiary text-white rounded-3xl p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-2xl font-serif mb-4">Student Resources</h3>
+<p class="text-sm text-white/70 mb-6">Mock exams, bar council prep, and law school notes.</p>
+<button class="text-tertiary-fixed font-bold flex items-center gap-2">Access Portal <span class="material-symbols-outlined group-hover:translate-x-1 transition-all">north_east</span></button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[120px] text-white/5 rotate-12">school</span>
+</div>
+<!-- Famous Case Studies - Small Card -->
+<div class="lg:col-span-3 bg-white rounded-3xl overflow-hidden shadow-xl shadow-blue-900/5 border border-primary/5 group">
+<div class="h-1/2 relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Panoramic view of the Supreme Court of India building with its iconic dome under a clear blue sky, regal and historic architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyZzIE7oXkyLHJk984sc0lXcXPQ9Oib-33Cc5aiUsySZP9TSKb1bF1zjYUkUl100rsvo4ICqXnClUIi5Qe-fQpQY9V4Na4wjxLIgLcJ62Ec7wVVBc60Zs7mbpyVhTLsfCg2_3iegwPKdm-z9DwT8Ovq-PIR2pAgnszkJT8E7U_G61RB_4L6_lTVy8lrE50Ew45KlT-UxcaXUd27-3vx9uPUba4VaeoNOD2KAjk0RUGfp91p_71nTf_mG5N3-sF3ZAlI8tL-zGoMWE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+<div class="p-6">
+<h3 class="text-xl font-serif text-primary mb-2">Famous Case Studies</h3>
+<p class="text-xs text-slate-500 leading-relaxed mb-4">Analyzing landmark judgments that shaped Indian history.</p>
+<a class="text-sm font-bold text-primary underline" href="#">Read Chronicles</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 text-blue-900 dark:text-blue-400 full-width mt-20 pt-16 pb-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 max-w-7xl mx-auto">
+<!-- Brand Column -->
+<div class="md:col-span-1">
+<div class="text-xl font-serif text-blue-900 dark:text-blue-200 mb-4">LawAssist India</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 italic">Empowering citizens through legal literacy and digital transformation of the Indian judicial landscape.</p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-lg">share</span>
+</a>
+</div>
+</div>
+<!-- Links 1 -->
+<div>
+<h4 class="font-serif text-lg text-blue-900 dark:text-blue-200 mb-6">Platform</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-600 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 underline-offset-4 hover:underline transition-opacity opacity-80 hover:opacity-100" href="#">Home</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 underline-offset-4 hover:underline transition-opacity opacity-80 hover:opacity-100" href="#">About Us</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 underline-offset-4 hover:underline transition-opacity opacity-80 hover:opacity-100" href="#">Legal Awareness</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 underline-offset-4 hover:underline transition-opacity opacity-80 hover:opacity-100" href="#">Contact</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 underline-offset-4 hover:underline transition-opacity opacity-80 hover:opacity-100" href="#">Help &amp; FAQ</a></li>
+</ul>
+</div>
+<!-- Emergency Helplines -->
+<div>
+<h4 class="font-serif text-lg text-blue-900 dark:text-blue-200 mb-6">Critical Helplines</h4>
+<ul class="space-y-4">
+<li>
+<p class="text-xs text-slate-500 uppercase tracking-widest mb-1">National Helpline</p>
+<a class="text-orange-700 dark:text-orange-400 font-semibold text-lg hover:underline transition-opacity" href="tel:15100">15100</a>
+</li>
+<li>
+<p class="text-xs text-slate-500 uppercase tracking-widest mb-1">Women Helpline</p>
+<a class="text-orange-700 dark:text-orange-400 font-semibold text-lg hover:underline transition-opacity" href="tel:1091">1091</a>
+</li>
+<li>
+<p class="text-xs text-slate-500 uppercase tracking-widest mb-1">National Emergency</p>
+<a class="text-orange-700 dark:text-orange-400 font-semibold text-lg hover:underline transition-opacity" href="tel:112">112</a>
+</li>
+</ul>
+</div>
+<!-- Newsletter -->
+<div>
+<h4 class="font-serif text-lg text-blue-900 dark:text-blue-200 mb-6">Stay Informed</h4>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Get weekly legal updates and new law summaries.</p>
+<div class="relative">
+<input class="w-full bg-white dark:bg-slate-800 border-none rounded-lg py-3 px-4 text-sm focus:ring-2 focus:ring-primary shadow-sm" placeholder="Email Address" type="email"/>
+<button class="absolute right-2 top-1.5 p-1.5 bg-primary text-white rounded-md hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+<div class="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+<a class="text-[10px] text-slate-400 hover:text-primary transition-all" href="#">Privacy Policy</a>
+<a class="text-[10px] text-slate-400 hover:text-primary transition-all" href="#">Terms</a>
+<a class="text-[10px] text-slate-400 hover:text-primary transition-all" href="#">Disclaimer</a>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 max-w-7xl mx-auto px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-500 dark:text-slate-500 text-xs">© 2024 LawAssist India. The Modern Institutionalist.</p>
+<p class="text-slate-400 dark:text-slate-600 text-[10px] uppercase tracking-[0.2em]">Designed for Sovereignty, Integrity, and Justice</p>
+</div>
+</footer>
+<!-- FAB for AI (Mobile focus but persistent) -->
+<div class="fixed bottom-8 right-8 z-[100] md:hidden">
+<button class="w-14 h-14 bg-secondary rounded-full shadow-2xl flex items-center justify-center text-white active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+</div>
+</body></html>

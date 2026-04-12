@@ -1,0 +1,527 @@
+/* NyayaBotPromo.css */
+.nyayabot-section {
+  position: relative;
+  padding: 6rem 0;
+  background-color: #020612; /* Matching the deep obsidian */
+  overflow: hidden;
+  font-family: var(--font-sans);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Ambient Glows */
+.nyayabot-glow-1 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background-color: rgba(234, 88, 12, 0.08); /* Deep Blue */
+  filter: blur(120px);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nyayabot-glow-2 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 400px;
+  background-color: rgba(6, 182, 212, 0.08); /* Cyan */
+  filter: blur(100px);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nyayabot-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.nyayabot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .nyayabot-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Base copy styles */
+.nyayabot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(30, 58, 138, 0.2) 0%, rgba(15, 23, 42, 0.2) 100%);
+  border: 1px solid rgba(251, 146, 60, 0.15);
+  margin-bottom: 2rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 0 20px rgba(30, 58, 138, 0.2);
+}
+
+.nyayabot-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fb923c;
+  box-shadow: 0 0 10px #fb923c;
+  animation: pulse-bot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-bot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.nyayabot-badge-text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #bae6fd;
+  font-weight: 600;
+}
+
+.nyayabot-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-serif);
+}
+
+.nyayabot-highlight {
+  font-weight: 400;
+  font-style: italic;
+  background: linear-gradient(to right, #7dd3fc, #e0f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nyayabot-desc {
+  font-size: 1.125rem;
+  color: #8da4b4;
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* Feature list */
+.nyayabot-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.nyayabot-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: rgba(6, 11, 25, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nyayabot-feature-item:hover {
+  background-color: rgba(6, 11, 25, 0.7);
+  border-color: rgba(249, 115, 22, 0.3);
+  transform: translateX(6px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.nyayabot-feature-icon {
+  padding: 0.85rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fb923c;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nyayabot-feature-item:hover .nyayabot-feature-icon {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0));
+  border-color: rgba(249, 115, 22, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+}
+
+.nyayabot-feature-content h4 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  letter-spacing: -0.01em;
+}
+
+.nyayabot-feature-content p {
+  color: #8da4b4;
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* CTA Button */
+.nyayabot-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 2.5rem;
+  background-color: #ffffff;
+  color: #020617;
+  font-weight: 600;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.125rem;
+}
+
+.nyayabot-btn:hover {
+  background-color: #f8fafc;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+}
+
+.nyayabot-btn:active {
+  transform: translateY(-1px);
+}
+
+/* --- Right Side: Chat Mockup UI --- */
+.nyayabot-mockup-wrapper {
+  position: relative;
+  /* Add perspective so it floats visually */
+  perspective: 1200px;
+}
+
+.nyayabot-mockup {
+  position: relative;
+  z-index: 10;
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.005) 100%);
+  background-color: rgba(10, 18, 35, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 40px 60px -20px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotateY(-5deg) rotateX(2deg);
+}
+
+.nyayabot-mockup-wrapper:hover .nyayabot-mockup {
+  transform: rotateY(0deg) rotateX(0deg);
+}
+
+.nyayabot-mockup-header {
+  padding: 1.5rem;
+  background-color: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nyayabot-mockup-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nyayabot-mockup-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: #ea580c;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 5px 15px rgba(234, 88, 12, 0.4);
+}
+
+.nyayabot-mockup-info h5 {
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.01em;
+}
+
+.nyayabot-mockup-status {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nyayabot-status-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #34d399;
+  border-radius: 50%;
+  animation: pulse-bot 2s infinite;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.6);
+}
+
+.nyayabot-status-text {
+  font-size: 0.65rem;
+  color: #8da4b4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.nyayabot-mockup-content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: hidden;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.nyayabot-msg-user {
+  margin-left: auto;
+  max-width: 85%;
+  padding: 1rem 1.25rem;
+  border-radius: 1.25rem;
+  border-bottom-right-radius: 0.25rem;
+  background-color: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.nyayabot-msg-bot {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.nyayabot-msg-bot-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  background-color: #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.nyayabot-msg-bot-icon .material-icons {
+  font-size: 1.25rem;
+}
+
+.nyayabot-msg-bot-text {
+  max-width: 85%;
+  padding: 1rem 1.25rem;
+  border-radius: 1.25rem;
+  border-top-left-radius: 0.25rem;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  font-weight: 300;
+}
+
+.nyayabot-msg-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-left: 3.25rem; /* align with bot text */
+}
+
+.nyayabot-msg-action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nyayabot-msg-action-btn.primary {
+  color: #fb923c;
+  background-color: rgba(249, 115, 22, 0.1);
+  border-color: rgba(249, 115, 22, 0.2);
+}
+
+.nyayabot-msg-action-btn.secondary {
+  color: #94a3b8;
+}
+
+.nyayabot-msg-action-btn:hover {
+  background-color: rgba(51, 65, 85, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.nyayabot-mockup-input {
+  padding: 1.5rem;
+  background-color: rgba(15, 23, 42, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto;
+}
+
+.nyayabot-input-wrapper {
+  position: relative;
+}
+
+.nyayabot-input-icon-left {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 1.25rem;
+}
+
+.nyayabot-input-icon-right {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fb923c;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: transform 0.3s;
+}
+
+.nyayabot-input-icon-right:hover {
+  transform: translateY(-50%) translateX(2px);
+  color: #fdba74;
+}
+
+.nyayabot-input-field {
+  width: 100%;
+  background-color: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.25rem 3.5rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-style: italic;
+  font-family: var(--font-sans);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Trusted Badge */
+.nyayabot-trusted {
+  position: absolute;
+  bottom: -2rem;
+  left: -2rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  background-color: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 25px 40px -10px rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  backdrop-filter: blur(20px);
+}
+
+@media (min-width: 1024px) {
+  .nyayabot-trusted {
+    left: -4rem;
+  }
+}
+
+.nyayabot-trusted-avatars {
+  display: flex;
+}
+
+.nyayabot-trusted-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 3px solid #0f172a;
+  overflow: hidden;
+  margin-left: -1rem;
+}
+
+.nyayabot-trusted-avatar:first-child {
+  margin-left: 0;
+}
+
+.nyayabot-trusted-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nyayabot-trusted-info p:first-child {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin: 0 0 0.25rem 0;
+}
+
+.nyayabot-trusted-info p:last-child {
+  font-size: 1rem;
+  color: white;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Decorative background border */
+.nyayabot-deco-border {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  border-radius: 2rem;
+  z-index: 0;
+}

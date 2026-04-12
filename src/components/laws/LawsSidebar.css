@@ -1,0 +1,109 @@
+/* LawsSidebar.css */
+.laws-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 100px; /* Keeps sidebar in view when scrolling */
+}
+
+.sidebar-header h3 {
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.sidebar-header p {
+  color: #fb923c; /* Brand cyan */
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.domain-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.domain-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  color: #8da4b4;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.domain-link:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+.domain-link.active {
+  background-color: rgba(249, 115, 22, 0.08); /* Cyber cyan tint */
+  color: #fb923c;
+  border-left: 3px solid #fb923c;
+  font-weight: 600;
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.domain-link .material-icons {
+  font-size: 1.25rem;
+  opacity: 0.7;
+}
+
+.domain-link.active .material-icons {
+  opacity: 1;
+}
+
+.sidebar-cta {
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.sidebar-cta h4 {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.sidebar-cta p {
+  color: #64748b;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem 0;
+}
+
+.cta-btn {
+  background-color: transparent;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: #fb923c;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cta-btn:hover {
+  background-color: rgba(249, 115, 22, 0.1);
+  border-color: rgba(249, 115, 22, 0.6);
+}

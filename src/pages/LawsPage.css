@@ -1,0 +1,40 @@
+/* LawsPage.css */
+
+.laws-page-container {
+  min-height: 100vh;
+  background-color: #010e24; /* Deep Obsidian navy matching the landing page */
+  font-family: var(--font-sans);
+  color: var(--color-text-main);
+  position: relative;
+  overflow: hidden;
+  padding-top: 5rem; /* Strict clearance from TopNavBar */
+}
+
+/* Ambient glow bridging from TopNavBar */
+.laws-glow-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, rgba(2, 6, 18, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.laws-grid {
+  display: block;
+  margin-top: 4rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.laws-sidebar-wrap {
+  position: relative;
+}
+
+.laws-content-wrap {
+  position: relative;
+}

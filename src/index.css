@@ -1,0 +1,227 @@
+:root {
+  /* Colors: The Sovereign Palette */
+  --primary: #001b44;
+  --primary-container: #002f6c;
+  --on-primary: #ffffff;
+  
+  --surface: #f8f9fa;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f1f3f5;
+  --surface-container: #e9ecef;
+  --surface-container-highest: #dee2e6;
+  --on-surface: #191c1d;
+  
+  --secondary: #8f4e00; /* Saffron Accents */
+  --secondary-container: #ffdcc0;
+  --on-secondary-container: #4a2800;
+  
+  --tertiary: #012300; /* Green Accents */
+  --tertiary-container: #c4efc1;
+  --on-tertiary-container: #001a00;
+
+  --background: #f8f9fa;
+  --on-background: #001b44;
+
+  --outline-variant: #c4c7c5;
+
+  /* Typography: The Editorial Scale */
+  --font-serif: 'Newsreader', serif;
+  --font-sans: 'Inter', sans-serif;
+  
+  /* Text Sizes / Hierarchy */
+  --headline-lg: 3rem; 
+  --headline-md: 2.25rem; 
+  --title-md: 1.25rem; 
+  --body-lg: 1.125rem; 
+  --body-md: 1rem; 
+  --body-sm: 0.875rem; 
+  
+  /* Spacing Tokens */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Ambient Shadows */
+  --shadow-ambient: 0 8px 30px rgba(25, 28, 29, 0.06);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--on-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--primary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Typography Classes */
+.display-lg {
+  font-family: var(--font-serif);
+  font-size: var(--headline-lg);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.headline-lg {
+  font-family: var(--font-serif);
+  font-size: var(--headline-lg);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+.title-md {
+  font-family: var(--font-serif);
+  font-size: var(--title-md);
+  font-weight: 600;
+}
+
+.body-md {
+  font-family: var(--font-sans);
+  font-size: var(--body-md);
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--body-sm);
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Utilities */
+.text-primary {
+  color: var(--primary);
+}
+
+/* Signature Textures */
+.signature-gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  border-radius: 0.5rem; 
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  font-size: var(--body-md);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+  color: var(--on-primary);
+  box-shadow: var(--shadow-ambient);
+}
+
+.btn-secondary {
+  /* Ghost Border */
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid rgba(196, 199, 197, 0.4); 
+}
+
+/* Layering Containers */
+.layer-base {
+  background-color: var(--background);
+}
+
+.layer-low {
+  background-color: var(--surface-container-low);
+  padding: var(--spacing-xl);
+  border-radius: 1rem;
+}
+
+.layer-lowest {
+  background-color: var(--surface-container-lowest);
+  padding: var(--spacing-lg);
+  border-radius: 1rem;
+}
+
+/* Input Fields */
+.modern-input {
+  background-color: var(--surface-container-highest);
+  border: none;
+  border-bottom: 2px solid transparent; 
+  padding: 1rem;
+  font-family: var(--font-sans);
+  font-size: var(--body-md);
+  border-radius: 0.5rem 0.5rem 0 0;
+  transition: border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px; 
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--body-sm);
+}
+
+.chip-saffron {
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+
+.chip-green {
+  background-color: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background-color: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-ambient);
+  padding: var(--spacing-lg);
+}
+
+/* Card list */
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl); 
+}
+
+/* Floating ambient card */
+.ambient-card {
+  background-color: var(--surface-container-lowest);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-ambient);
+}

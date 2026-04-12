@@ -1,0 +1,235 @@
+/* FAQSection.css */
+
+.faq-section {
+  position: relative;
+  padding: 8rem 0;
+  background-color: #020612; /* Core theme obsidian, strictly flat */
+  overflow: hidden;
+  font-family: var(--font-sans);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.faq-container {
+  max-width: 800px; /* narrowed for better reading */
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header */
+.faq-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.faq-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(249, 115, 22, 0.08); /* flat, no gradient box-shadows */
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  margin-bottom: 2rem;
+}
+
+.faq-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fb923c;
+  animation: pulse-bot 2s infinite;
+}
+
+.faq-badge-text {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #bae6fd;
+  font-weight: 600;
+}
+
+.faq-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-serif);
+}
+
+.faq-highlight {
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(to right, #7dd3fc, #e0f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.faq-desc {
+  font-size: 1.125rem;
+  color: #8da4b4;
+  line-height: 1.8;
+  max-width: 42rem;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* Accordion */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* crisp, flat line */
+  transition: all 0.3s ease;
+}
+
+.faq-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 2.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-question-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  transition: color 0.3s;
+}
+
+@media (min-width: 768px) {
+  .faq-question-text {
+    font-size: 1.35rem; /* Not too huge, very clean */
+  }
+}
+
+.faq-question-btn:hover .faq-question-text {
+  color: #ffffff;
+}
+
+.faq-question-btn.open .faq-question-text {
+  color: #fb923c; /* Active question turns blue */
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  color: #64748b;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+}
+
+.faq-question-btn.open .faq-icon {
+  transform: rotate(180deg);
+  color: #fb923c;
+}
+
+.faq-answer-wrapper {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-answer-wrapper.open {
+  max-height: 500px;
+  opacity: 1;
+  margin-bottom: 2.5rem;
+}
+
+.faq-answer-text {
+  color: #94a3b8;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  padding-left: 1.5rem;
+  border-left: 2px solid rgba(249, 115, 22, 0.3); /* Simple structural accent */
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Minimalist CTA Bottom */
+.faq-cta-minimal {
+  margin-top: 6rem;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .faq-cta-minimal {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.faq-cta-content h3 {
+  font-size: 1.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.faq-cta-content p {
+  color: #64748b;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.faq-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.faq-cta-btn-primary {
+  padding: 1rem 2rem;
+  background: #ffffff;
+  color: #020617;
+  font-weight: 600;
+  border-radius: 0.5rem; /* modern flat radius */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.faq-cta-btn-primary:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.faq-cta-btn-secondary {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.faq-cta-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}

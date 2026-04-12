@@ -1,0 +1,120 @@
+/* LawsSearchHero.css */
+.laws-search-hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 4rem; /* Additional strict clearance */
+  margin-bottom: 4rem;
+}
+
+.laws-hero-title {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.laws-hero-title span {
+  font-style: italic;
+}
+
+.saffron-gradient {
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.laws-hero-subtitle {
+  color: #8da4b4;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  padding: 0 2rem;
+}
+
+.laws-search-bar-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.laws-search-bar-wrap:focus-within {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+}
+
+
+
+.laws-search-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  outline: none;
+}
+
+.laws-search-input::placeholder {
+  color: #475569;
+}
+
+.laws-search-btn {
+  background-color: #f97316;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.laws-search-btn:hover {
+  background-color: #fb923c;
+}
+
+.laws-category-chips {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.law-chip {
+  background-color: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.law-chip:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.law-chip.active {
+  background-color: rgba(249, 115, 22, 0.1);
+  border-color: rgba(249, 115, 22, 0.3);
+  color: #fb923c;
+}
