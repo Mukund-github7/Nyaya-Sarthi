@@ -2557,77 +2557,7 @@ BookingSchema.index({ lawyerId: 1, scheduledAt: 1, status: 1 });
 
 ---
 
-## 12. 36-Hour Execution Roadmap
-
-**Timeline:** April 11, 10:00 IST → April 12, 20:00 IST  
-**Team:**
-- **Person A** — Full-Stack Lead (Next.js setup, auth, MongoDB, API routes)
-- **Person B** — AI/ML Engineer (GPT-4o integrations, OCR pipeline, prompts)
-- **Person C** — Frontend/UI (all pages, Tailwind design, voice interface, mobile)
-- **Person D** — Features/Integration (marketplace, doc generator, eCourts, case tracker, admin)
-
----
-
-### Phase 1: Foundation (Hours 1–6) | April 11: 10:00–16:00
-
-| Time | Person A | Person B | Person C | Person D |
-|------|----------|----------|----------|----------|
-| 10:00–11:00 | **GitHub repo setup** (fresh creation, MIT license, README skeleton, branch strategy) | Same: Review all GPT prompt specs, set up OpenAI API keys, test GPT-4o access | Same: Create Figma/paper wireframes for 5 core screens | Same: Review feature list, create personal task checklist |
-| 11:00–12:30 | **Next.js 14 init** (App Router, Tailwind, ESLint), folder structure, env setup, Vercel deployment connected | **OpenAI SDK setup** (`lib/openai.js`), test GPT-4o call, implement LexBot system prompt v1 | **Design system** (Tailwind config: colors, fonts, spacing), global layout components (Navbar, Footer, Sidebar skeleton) | **MongoDB Atlas** cluster creation, IP whitelist, connection string, `lib/db/mongoose.js` |
-| 12:30–14:00 | **NextAuth.js v5** setup: credentials provider, bcrypt, JWT callbacks, 3-role session, `middleware.js` | **LexBot API route** (`/api/lexbot/chat`): full implementation with history, domain detection, severity, session save | **Landing page** (Hero, Features, CTA) — mobile-responsive | **All 10 Mongoose schemas** (copy from TRD, review, test with dummy data) |
-| 14:00–14:30 | 🍽️ **Lunch Break** (everyone) | | | |
-| 14:30–16:00 | **User/Lawyer/Admin models** seeded, auth API routes tested with Postman, login/signup pages working end-to-end | **ChatSession schema** integration with LexBot, test full chat flow (input → GPT → save → response) | **Login/Signup pages** with role selector, form validation, NextAuth integration | **Lawyer + Booking schemas** finalized, `GET /api/lawyers` with filters implemented |
-
-**Phase 1 Checkpoint (16:00):** ✅ App deploys to Vercel. ✅ Login/signup working. ✅ LexBot sends/receives GPT-4o messages. ✅ Database connected.
-
----
-
-### Phase 2: Core Features (Hours 7–18) | April 11: 16:00 → April 12: 04:00
-
-| Time | Person A | Person B | Person C | Person D |
-|------|----------|----------|----------|----------|
-| 16:00–18:00 | **Dashboard layout** (sidebar, role-aware nav, HearingReminderBanner), route group layouts | **Document Analysis API** (`/api/documents/analyze`): Cloudinary upload + pdf-parse + Tesseract.js + GPT-4o chain | **LexBot UI** — ChatWindow, MessageBubble, ChatInput with voice button (Web Speech API integration) | **Lawyer registration + profile** API routes (`POST /api/lawyers`, `GET /api/lawyers/[id]`), lawyer profile page |
-| 18:00–20:00 | **Case API routes** (CRUD + timeline + evidence), eCourts proxy route | **Document generator** (`/api/documents/generate`): 7 document type prompts + GPT generation + save | **Document upload UI** — FileUploader, AnalysisResult risk dashboard (color-coded cards) | **Smart matching** (`/api/lawyers/match`), lawyer marketplace page with filters |
-| 20:00–21:00 | 🍽️ **Dinner Break** (everyone) | | | |
-| 21:00–23:00 | **Booking API** (create, patch, delete, scheduling conflict check, emergency flow) | **ElevenLabs TTS** integration (`lib/ai/tts.js`), voice output for LexBot, fallback to browser SpeechSynthesis | **Document Generator wizard** UI (multi-step form, 7 types, progress bar, preview) | **Case management pages** (list, create, detail with Timeline component, Evidence Vault) |
-| 23:00–01:00 | **Reviews API** (post-booking gate, rating aggregation post-save hook), forum API routes | **Law Search API** (`/api/hub/lawsearch`) with law search system prompt, test accuracy on 10 queries | **Lawyer marketplace UI** complete (LawyerCard, FilterBar, booking modal, reviews), LexBot voice output rendering | **Admin panel** pages: lawyer verification queue, approve/reject flow |
-| 01:00–02:00 | 😴 **Rest (Light — 1 hour)** | | | |
-| 02:00–04:00 | **Forum + Hub API routes** (casestudies CRUD, forum posts + answers + upvotes) | **OCR edge cases** (timeout handling, <100 char fallback, JSON parse retry logic), test with 10 real documents | **Cases pages** (detail: timeline, evidence upload, eCourts status widget), forum pages | **Hub pages** (case studies list/detail), law search page, seed 10 case studies in MongoDB |
-
-**Phase 2 Checkpoint (04:00):** ✅ All major APIs functional. ✅ LexBot voice works. ✅ Document analysis pipeline end-to-end. ✅ Lawyer marketplace filterable. ✅ Case management CRUD complete.
-
----
-
-### Phase 3: Integration & Polish (Hours 19–30) | April 12: 04:00–14:00
-
-| Time | Person A | Person B | Person C | Person D |
-|------|----------|----------|----------|----------|
-| 04:00–06:00 | **Bug fixes** from Phase 2 APIs, **hearing reminder** logic (48h check), emergency SOS booking flow | **Multilingual testing**: Hindi input/output end-to-end, prompt refinement for mixed-language responses | **Women's Safety Wing page** (static, action guides, helplines, police station locator), **Emergency SOS UI** | **eCourts status** integration in case detail page, **Forum** (create post, answers, Verified Lawyer badge) |
-| 06:00–07:00 | 😴 **Rest** | 😴 **Rest** | 😴 **Rest** | 😴 **Rest** |
-| 07:00–09:00 | **Security audit**: input validation (Zod), file upload guards, auth guards on all routes | **Quiz page** (load 25-question JSON, client-side scoring, score display), LexBot → Lawyer Marketplace handoff (domain pre-filter) | **Mobile responsiveness pass** on all pages, Tailwind breakpoint fixes, touch gestures for LexBot | **Admin content panel** (add/edit/publish case studies), seed admin user, test full admin flow |
-| 09:00–10:00 | 🍽️ **Breakfast Break** | | | |
-| 10:00–12:00 | **Performance**: SWR integration, Next.js Image optimization, API response time profiling | **GPT prompt fine-tuning**: test edge cases (emergency, multilingual, ambiguous queries), improve JSON reliability | **UI polish**: animations (Framer Motion lightweight), empty states, loading skeletons, error boundaries | **End-to-end user journey** test: signup → LexBot → marketplace → booking → case → document |
-| 12:00–14:00 | **Vercel deployment** final config, env vars verified, domain setup, preview URL tested | **README AI disclosure section** written, API keys documented | **Final UI polish**: consistent spacing, color palette, accessibility (aria-labels, keyboard nav) | **Data seeding**: 10 case studies, 5 lawyer profiles, 3 forum posts for demo |
-
-**Phase 3 Checkpoint (14:00):** ✅ Full user journey works end-to-end. ✅ Mobile responsive. ✅ Admin panel functional. ✅ Deployed on Vercel.
-
----
-
-### Phase 4: Submission Prep (Hours 31–36) | April 12: 14:00–20:00
-
-| Time | All Team — Collaborative |
-|------|--------------------------|
-| 14:00–15:00 | **Feature Triage Protocol (Hour 28+4):** Review what works, what's broken. Cut anything not demo-ready. Define 5-minute demo script. |
-| 15:00–16:30 | **Demo video recording**: Screen record 5-minute walkthrough covering: LexBot chat → voice → emergency routing → document analysis → lawyer booking → case management → admin approval |
-| 16:30–17:30 | **Presentation deck**: 8 slides: Problem → Solution → Tech Stack → Key Features → AI Integration → Impact → Team → Demo Link |
-| 17:30–18:30 | **Final README**: Complete all sections, add screenshots, verify all env vars documented, AI usage disclosed, MIT license confirmed |
-| 18:30–19:00 | **Final commit + push**: Clean up code (remove console.logs), ensure all commits are post-April 11 (ByteVerse-26 compliance), tag `v1.0.0` |
-| 19:00–19:30 | **Submission form**: Fill ByteVerse-26 submission form, paste GitHub URL, Vercel demo URL, video link |
-| 19:30–20:00 | **Buffer**: Final bug fixes, team debrief, celebration 🎉 |
-
----
-
-### Feature Triage Protocol (Hour 28 — April 12, 14:00)
+### Feature Triage Protocol 
 
 **Priority A (Must demo):**
 - LexBot chat with domain detection
@@ -2654,8 +2584,6 @@ BookingSchema.index({ lawyerId: 1, scheduledAt: 1, status: 1 });
 ```markdown
 # Nyaya Sarthi — न्याय सारथी
 ### Your AI-Powered Guide to Justice | भारतीय नागरिकों के लिए कानूनी सहायता
-
-> Built for ByteVerse-26 Hackathon | NIT Patna | April 11–12, 2026
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black)](https://nyaya-sarthi.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -2753,7 +2681,7 @@ Over 80% of India's 1.4 billion citizens cannot afford a lawyer. Legal processes
 ### Prerequisites
 - Node.js 18+
 - MongoDB Atlas account (free tier)
-- OpenAI API key
+- Gemini API key
 - Cloudinary account (free tier)
 - ElevenLabs API key (free tier)
 
@@ -2780,8 +2708,8 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/nyaya
 NEXTAUTH_SECRET=your-super-secret-key-minimum-32-characters
 NEXTAUTH_URL=http://localhost:3000
 
-# ─── OpenAI ──────────────────────────────────────────────
-OPENAI_API_KEY=sk-...
+# ─── Gemini ──────────────────────────────────────────────
+GEMINI_API_KEY=sk-...
 
 # ─── ElevenLabs ──────────────────────────────────────────
 ELEVENLABS_API_KEY=...
@@ -2849,7 +2777,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 | AI Tool | Usage | Provider |
 |---------|-------|----------|
-| **GPT-4o** | LexBot conversational legal guidance, document risk analysis, law search explanations, document generation | OpenAI |
+| **Gemini** | LexBot conversational legal guidance, document risk analysis, law search explanations, document generation | Gemini |
 | **Web Speech API** | Voice-to-text input for LexBot (browser-native, no external API) | Browser / Google |
 | **ElevenLabs API** | Text-to-speech voice output for LexBot responses | ElevenLabs |
 | **Tesseract.js** | Optical Character Recognition (OCR) for image-format legal documents | Open Source (Apache 2.0) |
@@ -2881,24 +2809,6 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 ---
 
-## 14. ByteVerse-26 Rulebook Compliance Checklist
-
-| # | Requirement | Status | Implementation Note |
-|---|-------------|--------|---------------------|
-| 1 | GitHub repository freshly created after hackathon starts (April 11) | ✅ | Repository created at Hour 1 (10:00 IST, April 11) — first commit timestamp verifiable |
-| 2 | Repository must be public throughout the event | ✅ | Repository visibility set to **Public** at creation; never set to private |
-| 3 | Valid open-source license (MIT) required | ✅ | `LICENSE` file with MIT license text in root directory |
-| 4 | All AI tool usage explicitly disclosed in README | ✅ | See README Section "AI Usage Disclosure" — GPT-4o, Web Speech API, ElevenLabs, Tesseract.js all listed |
-| 5 | Projects must follow FOSS principles (no proprietary core logic) | ✅ | All business logic is open-source; AI services (OpenAI, ElevenLabs) are external APIs, not proprietary logic |
-| 6 | No plagiarism or undisclosed code reuse | ✅ | All code written during hackathon; open-source libraries declared in `package.json` with MIT/Apache licenses |
-| 7 | Live demo accessible | ✅ | Deployed to Vercel at `nyaya-sarthi.vercel.app` — public URL in README |
-| 8 | AI-generated code/content disclosed | ✅ | README states GitHub Copilot and Claude used for assistance |
-| 9 | Project addresses the hackathon theme | ✅ | Legal-tech platform directly addresses access to justice for Indian citizens |
-| 10 | Team size within limits | ✅ | 4-person team |
-| 11 | No use of pre-built project templates sold commercially | ✅ | Built on Next.js (open-source framework) from scratch |
-| 12 | Working prototype demonstrable in 5 minutes | ✅ | Demo video script covers all core features in ≤5 minutes (see Phase 4 roadmap) |
-
----
 
 ## Appendix A: Environment Variables Reference
 
@@ -2907,7 +2817,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 | `MONGODB_URI` | ✅ | MongoDB Atlas connection string |
 | `NEXTAUTH_SECRET` | ✅ | JWT signing secret (min 32 chars) |
 | `NEXTAUTH_URL` | ✅ | App base URL (e.g., `https://nyaya-sarthi.vercel.app`) |
-| `OPENAI_API_KEY` | ✅ | OpenAI API key for GPT-4o |
+| `GEMINI_API_KEY` | ✅ | Gemini API key for GPT-4o |
 | `ELEVENLABS_API_KEY` | ✅ | ElevenLabs text-to-speech API key |
 | `ELEVENLABS_VOICE_ID_EN` | ⚠️ | ElevenLabs voice ID for English |
 | `ELEVENLABS_VOICE_ID_HI` | ⚠️ | ElevenLabs voice ID for Hindi |
@@ -2940,4 +2850,3 @@ npm start
 ---
 
 *End of Technical Requirements Document — Nyaya Sarthi v1.0*  
-*ByteVerse-26 | NIT Patna | April 11–12, 2026*
