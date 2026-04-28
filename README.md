@@ -61,7 +61,7 @@ Create a .env in the root directory:
 
 
 MONGODB_URI=your_mongodb_atlas_uri
-OPENAI_API_KEY=your_openai_key
+GEMINI_API_KEY=your_gemini_api_key
 
 
 3. **Initialize Database:**
