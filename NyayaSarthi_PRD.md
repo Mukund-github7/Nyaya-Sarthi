@@ -10,8 +10,6 @@
 | **Document Type** | Product Requirements Document (PRD) |
 | **Product Name** | NyayaSarthi |
 | **Version** | 1.0 — Hackathon MVP |
-| **Event** | ByteVerse-26, NIT Patna |
-| **Date** | April 11, 2026 |
 | **Theme** | Law & Justice × Artificial Intelligence |
 | **Status** | Active — In Development |
 
