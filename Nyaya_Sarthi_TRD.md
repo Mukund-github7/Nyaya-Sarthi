@@ -1,12 +1,12 @@
 # Nyaya Sarthi — Technical Requirements Document (TRD)
-### ByteVerse-26 Hackathon | NIT Patna | April 11–12, 2026
+###  | NIT Patna |
 
 ---
 
 > **Document Version:** 1.0  
 > **Last Updated:** April 11, 2026  
 > **Classification:** Public (Open-Source, MIT License)  
-> **Team:** ByteVerse-26 Entry — Nyaya Sarthi
+
 
 ---
 
