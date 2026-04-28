@@ -25,7 +25,7 @@
 11. [Performance Considerations](#11-performance-considerations)
 12. [36-Hour Execution Roadmap](#12-36-hour-execution-roadmap)
 13. [README Structure](#13-readme-structure)
-14. [ByteVerse-26 Rulebook Compliance Checklist](#14-byteverse-26-rulebook-compliance-checklist)
+
 
 ---
 
