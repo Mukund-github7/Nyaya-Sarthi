@@ -25,7 +25,7 @@ A dedicated portal for high-priority legal rights (POSH, Domestic Violence) feat
 - **Frontend:** React 18, Vite, Tailwind CSS (High-performance UI)
 - **Backend:** Node.js, Express.js (Scalable API Orchestration)
 - **Database:** MongoDB Atlas (M0 Tier)
-- **AI/ML:** OpenAI GPT-4o, Tesseract.js (OCR), Web Speech API (Voice Access)
+- **AI/ML:** GOOGLE Gemini , Tesseract.js (OCR), Web Speech API (Voice Access)
 - **Tools:** Axios, Mongoose, Multer, Dotenv
 
 ---
@@ -46,7 +46,7 @@ In accordance with the **ByteVerse-26 Rulebook**, we transparently disclose the 
 ### Prerequisites
 - Node.js (v18+)
 - MongoDB Atlas Account
-- OpenAI API Key
+- Gemini API Key
 
 ### Running Locally
 
