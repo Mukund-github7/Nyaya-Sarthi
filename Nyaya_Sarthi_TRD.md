@@ -65,7 +65,7 @@
               ┌─────────────────────┼──────────────────────┤
               │                     │                      │
    ┌──────────▼──────┐  ┌──────────▼──────┐  ┌──────────▼──────────┐
-   │  OpenAI GPT-4o  │  │  MongoDB Atlas  │  │  External Services  │
+   │  Google Gemini  │  | MongoDB Atlas   │  │  External Services  │
    │  (LexBot +      │  │  (Primary DB)   │  │  • Cloudinary       │
    │   Doc Analysis  │  │                 │  │  • ElevenLabs       │
    │   + Law Search) │  │                 │  │  • eCourts API      │
@@ -78,7 +78,7 @@
 |-----------|-------------------|----------|---------------|
 | Next.js Pages | Next.js API Routes | Internal (same process) | NextAuth session cookie |
 | API Routes | MongoDB Atlas | Mongoose (TCP) | DB credentials via env |
-| API Routes | OpenAI GPT-4o | HTTPS REST | `OPENAI_API_KEY` |
+| API Routes | GOOGLE GEMINI | HTTPS REST | `GEMINII_API_KEY` |
 | API Routes | Cloudinary | HTTPS REST | `CLOUDINARY_*` env vars |
 | API Routes | ElevenLabs | HTTPS REST | `ELEVENLABS_API_KEY` |
 | API Routes | eCourts API | HTTPS REST | `ECOURTS_API_KEY` |
@@ -91,7 +91,7 @@
 2. **Client Action** → `fetch()` call to `/api/*` route
 3. **API Route** → NextAuth session verification via `getServerSession()`
 4. **API Route** → Mongoose query to MongoDB Atlas
-5. **If AI Feature** → OpenAI GPT-4o API call with structured prompt
+5. **If AI Feature** → GOOGLE Gemini API call with structured prompt
 6. **If File Feature** → Cloudinary upload + OCR processing
 7. **Response** → Structured JSON returned to client
 8. **Client** → React state update → UI re-render
@@ -107,7 +107,7 @@
 | **MongoDB Atlas** | Primary database | Schema-flexible NoSQL suits the varied data shapes (chat sessions, legal documents, case timelines). Atlas free tier supports hackathon scale. Mongoose provides schema enforcement. |
 | **Mongoose** | ODM | Strong schema validation and middleware hooks (e.g., pre-save password hashing) with TypeScript-friendly typing. |
 | **NextAuth.js v5** | Authentication | Native Next.js integration. Supports credentials provider (email/password) and JWT sessions. Three-role enforcement is trivial via session callbacks. |
-| **OpenAI GPT-4o** | Core AI engine | State-of-the-art reasoning for legal text. Superior JSON mode output for structured document analysis. Multilingual by default — critical for the Indian market. |
+| **Google Gemini-API ** | Core AI engine | State-of-the-art reasoning for legal text. Superior JSON mode output for structured document analysis. Multilingual by default — critical for the Indian market. |
 | **Tesseract.js** | Client-side OCR | Browser-native OCR eliminates an additional microservice. Supports Devanagari script for Hindi documents. |
 | **pdf-parse** | PDF text extraction | Lightweight, server-side, no binary dependencies — critical for Vercel serverless. |
 | **Web Speech API** | Voice STT | Zero cost, browser-native, no additional API keys. Sufficient quality for MVP voice input. |
